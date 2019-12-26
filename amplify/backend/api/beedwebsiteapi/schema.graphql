@@ -1,0 +1,15 @@
+type Farm @model {
+  id: ID!
+  name: String!
+  location: String!
+  email: String!
+  products: [Product] @connection(name: "FarmProducts")
+}
+type Product @model {
+  id: ID!
+  title: String!
+  description: String!
+  price: Float!
+  thumbnail: String!
+  farm: Farm @connection(name: "FarmProducts")
+}
