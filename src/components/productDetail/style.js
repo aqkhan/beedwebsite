@@ -56,5 +56,47 @@ font-weight: 700;
 table td{
 font-size:18px
 }
+.product-form{
+margin-top:100px;
+border: 1px solid rgba(34,36,38,.15);
+    padding: 1em;
+        box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+            width: 60%;
+       margin: 100px auto 0px auto;
+}
+.product-form p{
+font-size:25px;
+}
+.quantity-of-products{
+width:20%
+}
+.quantity-of-products::-webkit-outer-spin-button,
+.quantity-of-products::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  }
+.quantity-of-products {
+  -moz-appearance:textfield;
+}
+.quantity-group{
+    display: flex;
+    align-items: center;
+}
+.arrow-div{
+height: 30px;
+    width: 30px;
+       border: 1px solid rgba(34,36,38,.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+        margin-right: 10px;
+
+}
+.add-remove-arrow{
+margin-left: 30px;
+    display: flex;
+}
+
   `}</style>
 );
