@@ -6,6 +6,11 @@ export default () => (
 margin-top:30px;
     width: 60%;
     margin: 0 auto;
+        height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .login-container h1{
 padding-top:20px;
@@ -22,6 +27,7 @@ margin:8px 0px
 border: 1px solid rgba(34,36,38,.15);
     padding: 1em;
         box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+        width:100%;
 }
 .login-container form button:hover{
 background-color: #cf590c!important;

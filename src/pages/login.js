@@ -1,11 +1,10 @@
 import React from "react";
-import Layout from "../components/layout";
 import LoginComponent from "../components/loginpageComponent"
 const loginPage = () => {
     return (
-        <Layout>
+        <div>
             <LoginComponent/>
-        </Layout>
+        </div>
     )
 }
 export default loginPage
