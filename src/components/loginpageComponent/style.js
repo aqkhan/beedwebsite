@@ -13,7 +13,7 @@ padding-bottom:20px;
     font-size: 30px;
 }
 .login-container  .form-group {
-margin:30px 0px
+margin:8px 0px
 }
 .login-container  .form-control {
     padding: 25px 10px;
@@ -46,6 +46,15 @@ outline:none!important;
     margin-top: 15px;
     margin-bottom: 0;
     font-weight: 500;
+    font-size:12px
+}
+.error-div{
+min-height: 30px;
+}
+.error-div p{
+margin-bottom:0px;
+color:red;
+font-size:12px;
 }
   `}</style>
 );
