@@ -71,7 +71,7 @@ const LoginComponent = () => {
         <Container className="login-container">
             <h1>Log in to your account</h1>
 
-
+            <Formik>
                 <Form onSubmit={formik.handleSubmit}
                       validateOnChange={false}
                 >
@@ -107,7 +107,7 @@ const LoginComponent = () => {
                     </Button>
                     <p className="error">{error}</p>
                 </Form>
-
+            </Formik>
             <Style/>
         </Container>
     )
