@@ -90,7 +90,9 @@ const LoginComponent = () => {
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
+                        <div className="error-div">
                         <p className="error">{error}</p>
+                        </div>
                     </Form>
                 )}
             </Formik>
