@@ -1,87 +1,57 @@
 import React from "react";
 import {Container, Row, Card, Col} from "react-bootstrap";
 import Style from "./style";
+import {Link, graphql, useStaticQuery} from "gatsby"
 
 const Productspage = () => {
+    const products = useStaticQuery(graphql`
+query{
+  allMdx{
+    edges{
+      node{
+        frontmatter{
+          title
+          price
+          img
+        }
+        fields{
+          slug
+        }
+      }
+    }
+  }
+}
+  `)
+    let productsData = products && products.allMdx.edges;
 
-
+    console.log(productsData, "products data")
     return (
         <Container className="products-container">
             <h1 className="text-center" style={{fontSize: '4rem', padding: '30px 0px'}}>I&nbsp;
                 <span>&nbsp;&#9829;&nbsp;</span>LAMP</h1>
             <Row className="justify-content-between">
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={4}>
-                    <Card >
-                        <Card.Img variant="top"
-                                  src="https://parmsang.github.io/gatsby-starter-ecommerce/static/12af663b87c3a4933fc3930bae18e7e7/fdbb0/486349d6-c234-4c31-87ab-131f90230fb5.png"/>
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                $500
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                {
+                    productsData && productsData.map((sin, i) => {
+
+                        return (
+                            <Col md={4} key={i}>
+                                <Link to={`/product-detail/${sin.node.fields.slug}`}>
+                                    <Card>
+
+                                        <Card.Img variant="top"
+                                                  src={sin.node.frontmatter.img ? sin.node.frontmatter.img : "" }/>
+                                        <Card.Body>
+                                            <Card.Title>{sin.node.frontmatter.title ? sin.node.frontmatter.title : "" }</Card.Title>
+                                            <Card.Text>
+                                                {sin.node.frontmatter.price ? "$" + sin.node.frontmatter.price : "N/A"  }
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+                            </Col>
+                        )
+                    })
+                }
 
 
             </Row>

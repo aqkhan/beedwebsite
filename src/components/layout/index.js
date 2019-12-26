@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Header from "../header/header";
 import {Helmet} from "react-helmet";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +7,7 @@ import Footer from "../footer"
 
 
 const Layout = ({children}) => {
+
     return (
         <>
         <Helmet>

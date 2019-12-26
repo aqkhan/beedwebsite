@@ -1,8 +1,31 @@
 import React from "react";
 import {Container, Col, Row, Table} from "react-bootstrap";
-import Style from "./style"
-const productdetail = () => {
+import Style from "./style";
+import Layout from "../layout";
+import {graphql} from "gatsby";
+export const pageQuery = graphql`
+  query BlogPostQuery($id: String) {
+    mdx(id: { eq: $id }) {
+      id
+      frontmatter {
+        title
+        price
+        desc
+        img
+        material
+        maxWatt
+       bulbQty
+       finish
+       fitting
+      }
+    }
+  }
+`
+const productdetail = (props) => {
+    let data = props.data && props.data.mdx.frontmatter;
+
     return (
+        <Layout>
         <Container className="product-detail-container">
             <Row>
                 <Col md={6}>
@@ -10,8 +33,8 @@ const productdetail = () => {
                 </Col>
                 <Col md={4}>
                     <div className="product-into">
-                        <p>White Mod</p>
-                        <span >$400.00</span>
+                        <p>{data.title ? data.title : ""}</p>
+                        <span >{data.price ?  "$ "+ data.price :"N/A" } </span>
                     </div>
 
                 </Col>
@@ -19,9 +42,7 @@ const productdetail = () => {
             <Col md={12}>
                 <div className="about-produc">
                     <h1>About this product</h1>
-                    <p>Abstract, sculptural, refined and edgy with a modern twist. Its symmetrical, spoked structure
-                        generates a clever geometric presence, which works well in a contemporary environment. The lamp
-                        is a tripod floor lamp with lagoon blue base and white metal shade.</p>
+                    <p>{data.desc ? data.desc : ""}</p>
                 </div>
                 <hr/>
                 <div className="before-table">
@@ -32,24 +53,22 @@ const productdetail = () => {
                     <tbody>
                     <tr>
                         <td>Material</td>
-                        <td>Steel & acrylic</td>
+                        <td>{data.material ? data.material : ""}</td>
                     </tr>
                     <tr>
-                        <td>Max watt.	</td>
-                        <td>60W</td>
+                        <td>Max watt.</td>
+                        <td>{data.maxWatt ? data.maxWatt+" W" : ""}</td>
                     </tr>   <tr>
                         <td>Bulb qty.</td>
-                        <td>6</td>
+                        <td>{data.bulbQty ? data.bulbQty : ""}</td>
                     </tr>   <tr>
                         <td>Finish</td>
-                        <td>Matt blue
+                        <td>{data.finish ? data.finish : ""}
                         </td>
                     </tr>
                     <tr>
                         <td>Fitting	</td>
-                        <td>E27
-
-                        </td>
+                        <td>{data.fitting ? data.fitting : ""}</td>
                     </tr>
 
                     </tbody>
@@ -57,6 +76,7 @@ const productdetail = () => {
             </Col>
             <Style/>
         </Container>
+        </Layout>
     )
 }
 export default productdetail
