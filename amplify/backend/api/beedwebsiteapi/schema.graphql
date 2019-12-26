@@ -13,3 +13,20 @@ type Product @model {
   thumbnail: String!
   farm: Farm @connection(name: "FarmProducts")
 }
+type User @model {
+  id: ID!
+  user_id: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  thumbnail: String
+  store: Store @connection(name: "StoreUsers")
+}
+type Store @model {
+  id: ID!
+  Name: String!
+  description: String!
+  location: Float!
+  email: String!
+  users: [User] @connection(name: "StoreUsers")
+}

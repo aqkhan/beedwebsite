@@ -133,3 +133,141 @@ export const deleteProduct = `mutation DeleteProduct(
   }
 }
 `;
+export const createUser = `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    first_name
+    last_name
+    email
+    thumbnail
+    store {
+      id
+      Name
+      description
+      location
+      email
+      users {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    first_name
+    last_name
+    email
+    thumbnail
+    store {
+      id
+      Name
+      description
+      location
+      email
+      users {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    first_name
+    last_name
+    email
+    thumbnail
+    store {
+      id
+      Name
+      description
+      location
+      email
+      users {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const createStore = `mutation CreateStore(
+  $input: CreateStoreInput!
+  $condition: ModelStoreConditionInput
+) {
+  createStore(input: $input, condition: $condition) {
+    id
+    Name
+    description
+    location
+    email
+    users {
+      items {
+        id
+        first_name
+        last_name
+        email
+        thumbnail
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateStore = `mutation UpdateStore(
+  $input: UpdateStoreInput!
+  $condition: ModelStoreConditionInput
+) {
+  updateStore(input: $input, condition: $condition) {
+    id
+    Name
+    description
+    location
+    email
+    users {
+      items {
+        id
+        first_name
+        last_name
+        email
+        thumbnail
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteStore = `mutation DeleteStore(
+  $input: DeleteStoreInput!
+  $condition: ModelStoreConditionInput
+) {
+  deleteStore(input: $input, condition: $condition) {
+    id
+    Name
+    description
+    location
+    email
+    users {
+      items {
+        id
+        first_name
+        last_name
+        email
+        thumbnail
+      }
+      nextToken
+    }
+  }
+}
+`;
