@@ -74,7 +74,10 @@ cursor:pointer;
 }
 .single-product-thumbnaail{
 height:285px;
-background-image:url("https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555275829/shape/mentalfloss/istock-509469214.jpg");
+// background-image:url("https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555275829/shape/mentalfloss/istock-509469214.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .single-product-detail{
 padding:10px 20px;
@@ -100,6 +103,9 @@ font-weight:600;
 }
 .view-more-btn:focus{
 outline:none!important
+}
+a{
+color:unset!important
 }
   `}</style>
 );

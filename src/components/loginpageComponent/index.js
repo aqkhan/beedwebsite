@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import Style from "./style";
 import {Container, Form, Button} from "react-bootstrap";
 import {Formik} from 'formik';
+import axios from "axios";
+import {apiPath} from "../../../config";
+import cookie from "react-cookies"
 const LoginComponent = () => {
 
     const [error, seterror] = useState("")
@@ -11,16 +14,28 @@ const LoginComponent = () => {
             email: "test@test.com",
             password: "beed123!"
         }
-        if (values.email === loginData.email && values.password === loginData.password) {
-            localStorage.setItem("beedUser", true);
-            window.location.href = "/"
+
+        let data = {
+            user_name: values.username,
+            password: values.password
         }
-        else {
-            seterror("Invalid Email Or Password")
-            setTimeout(() => {
-                seterror("")
-            }, 3000)
-        }
+        axios.post(apiPath + "/login", data).then(res => {
+            console.log(res.data, "res data")
+            if (res.data.idToken) {
+            localStorage.setItem("token",res.data.idToken)
+                // cookie.save("token", res.data.idToken);
+                window.location.href = "/"
+            }
+            else {
+                console.log("check two enter")
+                seterror(res.data.message)
+                setTimeout(() => {
+                    seterror("")
+                }, 3000)
+            }
+
+
+        })
 
     }
     const validate = (values) => {
@@ -30,11 +45,12 @@ const LoginComponent = () => {
 
         }
 
-        if (!values.email) {
-            errors.email = 'Please Enter Email';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-            errors.email = 'Invalid email address';
+        if (!values.username) {
+            errors.username = 'Please Enter Username';
         }
+        // else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        //     errors.email = 'Invalid email address';
+        // }
 
         return errors;
     }
@@ -43,7 +59,7 @@ const LoginComponent = () => {
         <Container className="login-container">
 
 
-            <Formik  validateOnChange={false} initialValues={{email: '', password: ''}}
+            <Formik validateOnChange={false} initialValues={{username: '', password: ''}}
                     validate={(values) => validate(values)}
                     onSubmit={(values) => Login(values)}
             >
@@ -54,21 +70,21 @@ const LoginComponent = () => {
                     <Form onSubmit={handleSubmit}>
                         <h1>Login </h1>
                         <Form.Group>
-                            <Form.Label htmlFor="email">Email </Form.Label>
-                            <Form.Control type="email" placeholder="Enter email"
-                                          name="email"
+                            <Form.Label htmlFor="username">Username</Form.Label>
+                            <Form.Control type="username" placeholder="Enter email"
+                                          name="username"
                                           onChange={handleChange}
-                                          value={values.email}
+                                          value={values.username}
                                           onBlur={handleBlur}
 
                             />
 
                         </Form.Group>
                         <div className="error-div">
-                        {errors.email && touched.email &&
-                        <p>{errors.email}</p>
+                            {errors.username && touched.username &&
+                            <p>{errors.username}</p>
 
-                        }
+                            }
                         </div>
                         <Form.Group>
                             <Form.Label htmlFor="password">Password</Form.Label>
@@ -83,19 +99,19 @@ const LoginComponent = () => {
                         </Form.Group>
                         <p className="forgot-password">Forgot Password ? </p>
                         <div className="error-div">
-                        {errors.password && touched.password &&
+                            {errors.password && touched.password &&
 
-                        <p>{errors.password}</p>
+                            <p>{errors.password}</p>
 
-                        }
+                            }
                         </div>
                         <div className="d-flex justify-content-center">
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
                         </div>
                         <div className="error-div">
-                        <p className="error">{error}</p>
+                            <p className="error">{error}</p>
                         </div>
                         <p className="dont-have-account">Don't Have an Account.<span>Sign Up</span></p>
                     </Form>

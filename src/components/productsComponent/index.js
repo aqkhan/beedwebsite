@@ -1,45 +1,46 @@
-import React from "react";
-import {Container, Row, Card, Col} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Container, Col} from "react-bootstrap";
 import Style from "./style";
-import {Link, graphql, useStaticQuery} from "gatsby";
+import {Link} from "gatsby";
 import Mainsction from "../homeMain";
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks';
 import {listProducts} from "../quries";
+import Loader from "../loader"
 
 const Productspage = () => {
-    const {loading, data, error} = useQuery(listProducts, {
+    const [products, setprdocts] = useState(null)
+    const [copydata, setcopydata] = useState(null)
+    const {data, error} = useQuery(listProducts, {
         variables: {
             limit: 1000
-        },
-        headers: {
-            authorization:  `Bearer ${"eyJraWQiOiIybVdpaFdjYVBtUnJHVUVab1Y1bFE3MkpOczgwXC94Q1FrOWhzSDdlZmxaQT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZGRjYmM4MC04ZjE4LTRjMzctODFmNC1kNmI2NWE2MGU3ZjciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfVVdSZUc0SlJmIiwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjp0cnVlLCJjb2duaXRvOnVzZXJuYW1lIjoicG1paW50ZWxsZWN0IiwiYXVkIjoiN2N2cW90bWZwMDY1Z3ZoaW51MHR2NG8xNHYiLCJldmVudF9pZCI6IjUwNGJkYzhhLTNiMjctNGQxOS04ZWI3LTFlMzhkMDdiNzNmZCIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTc3NDQzMjkzLCJwaG9uZV9udW1iZXIiOiIrOTIzNDI5NDYyMjkxIiwiZXhwIjoxNTc3NDQ2ODkzLCJpYXQiOjE1Nzc0NDMyOTMsImVtYWlsIjoicG1AaWludGVsbGVjdC5jby51ayJ9.fbLzP1RRUC5g8H0JnanhQJfq02keZiMGEeyFAXAh1Xr9WPmwtCef4XcllwU0vFciy2NOIwgyfam359Rt_d5swhDK7p-i8BAfko_WQs_bfb2YHzLVjn2ZXpxN3ZZ1YZl1kAU3KcV6Zo-j2gYLI17e_YI-G_T-1vMv-OK_WYqRykcg3iconsFiaRMb0NF60lqAvLskm3oHOYxEVpVKDS8o8VACJsHXJwzBqk_I-xDMOWMUGbQvRSfXRIiME6B-BwE0Rt_IYyZZpffAqtV8tAcAQjoOfo9qhEmXO10bCp4txkV8jx3rWGi5VonXjqq3N37hd3AyLw7p-xHwsVHzOHv24A"}`
         }
     });
 
+    useEffect(() => {
+        if (error) {
+            localStorage.removeItem("token")
+            window.location.href = "/login"
+        }
+        if (data && data.listProducts.items) {
+            setprdocts(data.listProducts.items);
+            setcopydata(data.listProducts.items);
+        }
+    }, [data, error]);
 
-    const products = useStaticQuery(graphql`
-query{
-  allMdx{
-    edges{
-      node{
-        frontmatter{
-          title
-          price
-          img
+    const filterSearch = (val) => {
+
+        if (val) {
+
+            val = val.toLowerCase();
+            setprdocts(products && products.filter(sin=>sin.title.toLowerCase().indexOf(val)!== -1))
         }
-        fields{
-          slug
+        else {
+            setprdocts(copydata)
         }
-      }
+
     }
-  }
-}
-  `)
-    let productsData = products && products.allMdx.edges;
 
-    console.log(productsData, "products data");
-    console.log(data,"new data")
-    return (
+    return data ? (
         <div>
             <Mainsction/>
             <Container className="products-container">
@@ -50,7 +51,7 @@ query{
                     <Col md={6}>
                         <div className="filter-div">
                             <div className="single-search-div">
-                                <input type="text" placeholder="Search Product"/>
+                                <input type="text" placeholder="Search Product" onChange={(event)=>filterSearch(event.target.value)}/>
                                 <i className="fa fa-search"/>
                             </div>
                             <div className="single-search-div filter-select">
@@ -64,113 +65,31 @@ query{
                         </div>
                     </Col>
                 </Col>
-                {/*<Row className="justify-content-between">*/}
-                {/*{*/}
-                {/*productsData && productsData.map((sin, i) => {*/}
 
-                {/*return (*/}
-                {/*<Col md={4} key={i}>*/}
-                {/*<Link to={`/product-detail/${sin.node.fields.slug}`}>*/}
-                {/*<Card>*/}
-
-                {/*<Card.Img variant="top"*/}
-                {/*src={sin.node.frontmatter.img ? sin.node.frontmatter.img : "" }/>*/}
-                {/*<Card.Body>*/}
-                {/*<Card.Title>{sin.node.frontmatter.title ? sin.node.frontmatter.title : "" }</Card.Title>*/}
-                {/*<Card.Text>*/}
-                {/*{sin.node.frontmatter.price ? "$" + sin.node.frontmatter.price : "N/A"  }*/}
-                {/*</Card.Text>*/}
-                {/*</Card.Body>*/}
-                {/*</Card>*/}
-                {/*</Link>*/}
-                {/*</Col>*/}
-                {/*)*/}
-                {/*})*/}
-                {/*}*/}
-
-
-                {/*</Row>*/}
                 <div className="d-flex flex-wrap">
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={4}>
-                        <div className="single-product-card">
-                            <div className="single-product-thumbnaail"/>
-                            <div className="single-product-detail">
-                                <p className="single-product-title">Product Title</p>
-                                <p className="single-product-farm">Farm Name</p>
-                                <p className="single-product-price">$ 100.00</p>
-                            </div>
-                        </div>
-                    </Col>
+                    {
+                        products && products.map((sin, i) => {
+                            let price = sin.price && parseInt(sin.price);
+
+                            return (
+
+                                <Col md={4} key={i}>
+                                    <Link to={"product-detail/?id="+sin.id}>
+                                    <div className="single-product-card">
+                                        <div className="single-product-thumbnaail" style={{  backgroundImage: "url(" + (sin.thumbnail ? sin.thumbnail : "") + ")",}}/>
+                                        <div className="single-product-detail">
+                                            <p className="single-product-title">{sin.title && sin.title}</p>
+                                            <p className="single-product-farm">{sin.farm && sin.farm.name}</p>
+                                            <p className="single-product-price">{price ? "$" + (Math.round(price * 100) / 100).toFixed(2) : "N/A"}</p>
+                                        </div>
+                                    </div>
+                                    </Link>
+                                </Col>
+                            )
+                        })
+                    }
+
+
                 </div>
                 <div className="cards-button-div d-flex justify-content-center">
                     <button className="btn view-more-btn">View More</button>
@@ -178,6 +97,6 @@ query{
                 <Style/>
             </Container>
         </div>
-    )
+    ):<Loader/>
 }
 export default Productspage

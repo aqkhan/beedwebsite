@@ -33,6 +33,10 @@ float:left;
 font-weight: 600;
 cursor: pointer;
 }
+.header-list li a{
+color:unset!important;
+text-decoration:none!important;
+}
 .user-img-div{
 height:50px;
 width:50px;
@@ -54,6 +58,9 @@ left: 10px;
 }
 .logout-dropdown{
 position:relative;
+}
+.logout-dropdown li{
+cursor:pointer;
 }
 .logout-dropdown i{
 font-size: 35px;
