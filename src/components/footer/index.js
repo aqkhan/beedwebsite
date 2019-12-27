@@ -3,7 +3,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import Style from "./style"
 const footer = () => {
 
-    return (
+   return (
         <footer>
             <Container fluid={true} className="p-0">
                 <Container className="p-0">
@@ -12,8 +12,8 @@ const footer = () => {
                             <div className="footer-one">
                                 <p>About</p>
                                 <ul>
-                                    <li><a href="#">Privacy</a></li>
-                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
                                 </ul>
                             </div>
 
@@ -35,17 +35,20 @@ const footer = () => {
                                  Extra space for a call to action inside the footer that could help re-engage users.
                              </span>
                                 <div className="d-flex">
-                                    <div className="d-flex align-items-center single-link"><i className="fa fa-twitter"/>
-                                        <div ><a href="https://twitter.com/parmsang" alt="twitter link">Twitter</a>
+                                    <div className="d-flex align-items-center single-link"><i
+                                        className="fa fa-twitter"/>
+                                        <div><a href="https://twitter.com/parmsang">Twitter</a>
                                         </div>
                                     </div>
-                                    <div className="d-flex align-items-center single-link"><i className="fa fa-facebook"/>
-                                        <div className="content"><a href="https://facebook.com/" alt="facebook link">Facebook</a>
+                                    <div className="d-flex align-items-center single-link"><i
+                                        className="fa fa-facebook"/>
+                                        <div className="content"><a href="https://facebook.com/">Facebook</a>
                                         </div>
                                     </div>
-                                    <div className="d-flex align-items-center single-link"><i className="fa fa-envelope"/>
+                                    <div className="d-flex align-items-center single-link"><i
+                                        className="fa fa-envelope"/>
                                         <div className="content"><a href="mailto:john@doe.com"
-                                                                    alt="email link">Email</a>
+                                        >Email</a>
                                         </div>
                                     </div>
                                 </div>
