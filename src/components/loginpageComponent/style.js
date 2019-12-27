@@ -4,7 +4,7 @@ export default () => (
     <style jsx="true">{`
 .login-container{
 margin-top:30px;
-    width: 60%;
+    width: 30%;
     margin: 0 auto;
         height: 100vh;
     display: flex;
@@ -15,7 +15,8 @@ margin-top:30px;
 .login-container h1{
 padding-top:20px;
 padding-bottom:20px;
-    font-size: 30px;
+    font-size: 26px;
+        text-align: center;
 }
 .login-container  .form-group {
 margin:8px 0px
@@ -30,14 +31,14 @@ border: 1px solid rgba(34,36,38,.15);
         width:100%;
 }
 .login-container form button:hover{
-background-color: #cf590c!important;
+background-color: #9dbd3a !important;
     color: #fff;
     text-shadow: none;
 
 }
 .login-container form button{
 border: none!important;
-background-color: #cf590c!important;
+background-color: #9dbd3a !important;
     color: #fff;
     text-shadow: none;
 }
@@ -61,6 +62,21 @@ min-height: 30px;
 margin-bottom:0px;
 color:red;
 font-size:12px;
+}
+.forgot-password{
+color:#9dbd3a;
+    text-align: right;
+}
+.dont-have-account span{
+font-weight:600;
+color:#9dbd3a;
+}
+.dont-have-account {
+
+text-align:center
+}
+.form-group label{
+font-weight: 600;
 }
   `}</style>
 );

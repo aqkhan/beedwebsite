@@ -41,7 +41,7 @@ const LoginComponent = () => {
 
     return (
         <Container className="login-container">
-            <h1>Log in to your account</h1>
+
 
             <Formik  validateOnChange={false} initialValues={{email: '', password: ''}}
                     validate={(values) => validate(values)}
@@ -52,6 +52,7 @@ const LoginComponent = () => {
                       errors
                   }) => (
                     <Form onSubmit={handleSubmit}>
+                        <h1>Login </h1>
                         <Form.Group>
                             <Form.Label htmlFor="email">Email </Form.Label>
                             <Form.Control type="email" placeholder="Enter email"
@@ -80,6 +81,7 @@ const LoginComponent = () => {
 
                             />
                         </Form.Group>
+                        <p className="forgot-password">Forgot Password ? </p>
                         <div className="error-div">
                         {errors.password && touched.password &&
 
@@ -87,12 +89,15 @@ const LoginComponent = () => {
 
                         }
                         </div>
+                        <div className="d-flex justify-content-center">
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
+                        </div>
                         <div className="error-div">
                         <p className="error">{error}</p>
                         </div>
+                        <p className="dont-have-account">Don't Have an Account.<span>Sign Up</span></p>
                     </Form>
                 )}
             </Formik>

@@ -1,0 +1,1 @@
+export const apiPath = "https://qyrsph142d.execute-api.us-east-1.amazonaws.com/dev/api/auth"

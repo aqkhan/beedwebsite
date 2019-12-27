@@ -6,7 +6,7 @@ export default () => (
  margin-top: 165px;
 }
 .product-image{
-min-height:400px;
+min-height:450px;
 background-size:cover;
 background-repeat:no-repeat;
 background-image:url("https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555275829/shape/mentalfloss/istock-509469214.jpg");
@@ -87,6 +87,19 @@ margin-left:10px;
 }
 .product-detail h1{
     padding-top: 60px;
+}
+.view-more-btn{
+    background-color: #9dbd3a;
+    color: white;
+    outline:none;
+    margin-top: 20px;
+
+}
+.view-more-btn:hover{
+    color: white;
+}
+.view-more-btn:focus{
+outline:none!important
 }
   `}</style>
 );
