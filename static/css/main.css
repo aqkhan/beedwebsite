@@ -1,12 +1,13 @@
-body{
+body {
     padding: 0;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
 
 }
-.loader{
+
+.loader {
     position: fixed;
-    top:0;
+    top: 0;
     bottom: 0;
     right: 0;
     left: 0;
@@ -16,5 +17,11 @@ body{
     background-color: white;
     z-index: 2;
 
+}
 
+.main-login-page .nav-main {
+display: none !important;
+}
+.main-login-page footer{
+    display: none!important;
 }

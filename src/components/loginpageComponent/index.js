@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Style from "./style";
 import {Container, Form, Button} from "react-bootstrap";
 import {Formik} from 'formik';
 import axios from "axios";
 import {apiPath} from "../../../config";
-import cookie from "react-cookies"
 const LoginComponent = () => {
 
     const [error, seterror] = useState("")
@@ -22,7 +21,7 @@ const LoginComponent = () => {
         axios.post(apiPath + "/login", data).then(res => {
             console.log(res.data, "res data")
             if (res.data.idToken) {
-            localStorage.setItem("token",res.data.idToken)
+                localStorage.setItem("token", res.data.idToken)
                 // cookie.save("token", res.data.idToken);
                 window.location.href = "/"
             }
@@ -55,7 +54,9 @@ const LoginComponent = () => {
         return errors;
     }
 
-    return (
+
+
+    return  (
         <Container className="login-container">
 
 
