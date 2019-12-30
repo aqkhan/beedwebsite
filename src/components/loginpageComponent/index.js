@@ -7,26 +7,23 @@ import {apiPath} from "../../../config";
 const LoginComponent = () => {
 
     const [error, seterror] = useState("")
+    const [submitBtn, setSubmitbtn] = useState("Submit")
 
     const Login = (values) => {
-        let loginData = {
-            email: "test@test.com",
-            password: "beed123!"
-        }
+        setSubmitbtn("Loading...")
 
         let data = {
             user_name: values.username,
             password: values.password
         }
+
         axios.post(apiPath + "/login", data).then(res => {
-            console.log(res.data, "res data")
+            setSubmitbtn("Submit")
             if (res.data.idToken) {
                 localStorage.setItem("token", res.data.idToken)
-                // cookie.save("token", res.data.idToken);
                 window.location.href = "/"
             }
             else {
-                console.log("check two enter")
                 seterror(res.data.message)
                 setTimeout(() => {
                     seterror("")
@@ -108,7 +105,7 @@ const LoginComponent = () => {
                         </div>
                         <div className="d-flex justify-content-center">
                             <Button variant="primary" type="submit">
-                                Submit
+                                {submitBtn}
                             </Button>
                         </div>
                         <div className="error-div">
