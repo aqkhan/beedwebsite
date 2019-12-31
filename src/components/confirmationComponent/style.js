@@ -62,5 +62,8 @@ height:100vh;
     transform: translate3d(4px, 0, 0);
   }
 }
+.confirmation-soory{
+color:#d01e1e!important;
+}
   `}</style>
 );

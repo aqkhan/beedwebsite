@@ -35,7 +35,7 @@ const ConfirmComponent = () => {
 
             {
                 !success && <div className="details">
-                    <h1>Sorry!</h1>
+                    <h1 className="confirmation-soory">Sorry!</h1>
                     <p>Your Order Could Not Been Confirmed.</p>
                 </div>
             }
