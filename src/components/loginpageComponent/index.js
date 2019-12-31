@@ -4,6 +4,7 @@ import {Container, Form, Button} from "react-bootstrap";
 import {Formik} from 'formik';
 import axios from "axios";
 import {apiPath} from "../../../config";
+import jwt_decode from "jwt-decode";
 const LoginComponent = () => {
 
     const [error, seterror] = useState("")
@@ -21,6 +22,8 @@ const LoginComponent = () => {
             setSubmitbtn("Submit")
             if (res.data.idToken) {
                 localStorage.setItem("token", res.data.idToken)
+                let Newtoken = jwt_decode(res.data.idToken);
+                localStorage.setItem("userImg", Newtoken["custom:thumbnail"] ? Newtoken["custom:thumbnail"] : "");
                 window.location.href = "/"
             }
             else {
@@ -44,16 +47,13 @@ const LoginComponent = () => {
         if (!values.username) {
             errors.username = 'Please Enter Username';
         }
-        // else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        //     errors.email = 'Invalid email address';
-        // }
+
 
         return errors;
     }
 
 
-
-    return  (
+    return (
         <Container className="login-container">
 
 
