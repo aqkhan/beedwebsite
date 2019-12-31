@@ -33,6 +33,10 @@ const Productdetail = (props) => {
         delay: confirmModal ? 300 : 0,
         height: confirmModal ? "100px" : "0px",
     });
+    const Menup = useSpring({
+        delay: confirmModal ? 1000 : 0,
+        display: confirmModal ? "block" : "none",
+    });
 
     const {data, error} = useQuery(getProduct, {
         variables: {
@@ -206,7 +210,7 @@ const Productdetail = (props) => {
             }
 
             <animated.div className="order-submission-modal" style={MenuOpen}>
-                <p>Your order has been placed successfully.Please check your email for conformation.</p>
+                <animated.p style={Menup}>Your order has been placed successfully.Please check your email for conformation.</animated.p>
             </animated.div>
 
 
