@@ -27,7 +27,7 @@ text-decoration:none!important;
 }
 .filter-div{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .single-search-div{
     border: 1px solid #bcbdbd;

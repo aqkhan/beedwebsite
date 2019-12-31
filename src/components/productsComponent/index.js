@@ -55,14 +55,6 @@ const Productspage = () => {
                                 <input type="text" placeholder="Search Product" onChange={(event)=>filterSearch(event.target.value)}/>
                                 <i className="fa fa-search"/>
                             </div>
-                            <div className="single-search-div filter-select">
-                                <select>
-                                    <option>Sort By</option>
-                                    <option>Option one</option>
-                                    <option>Option one</option>
-                                </select>
-                                <i className="fa fa-angle-down"/>
-                            </div>
                         </div>
                     </Col>
                 </Col>
