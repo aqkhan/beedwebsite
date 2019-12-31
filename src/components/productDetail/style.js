@@ -144,5 +144,7 @@ font-size: 20px;
 .remove-minus{
 margin-left:0px!important
 }
+.submit-error{color: red;
+    font-weight: 600;}
   `}</style>
 );

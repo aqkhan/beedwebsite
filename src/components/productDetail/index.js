@@ -23,6 +23,7 @@ const Productdetail = (props) => {
     const [submitOrder] = useMutation(createOrder);
     const [confirmModal, SetconfirmModal] = useState(false);
     const [buttonText, SetbuttonText] = useState("PLACE ORDER");
+    const [submitError, setSubmiterror] = useState("");
 
     let iniwindow = typeof window !== 'undefined' && window;
     let path = iniwindow && iniwindow.location.search;
@@ -119,7 +120,12 @@ const Productdetail = (props) => {
                     SetbuttonText("PLACE ORDER")
 
                 }).catch(error => {
-                    SetbuttonText("PLACE ORDER")
+                    SetbuttonText("PLACE ORDER");
+                    setSubmiterror("Unable to submit order");
+                    setTimeout(() => {
+                        setSubmiterror("");
+                    }, 5000);
+
                 })
             }).catch(error => {
                 SetbuttonText("PLACE ORDER")
@@ -196,6 +202,11 @@ const Productdetail = (props) => {
                                 </div>
 
                                 <button className="btn view-more-btn">{buttonText}</button>
+                                {submitError &&
+                                <p className="submit-error">{submitError}</p>
+                                }
+
+
                             </Form>
 
                         </Col>
@@ -210,7 +221,9 @@ const Productdetail = (props) => {
             }
 
             <animated.div className="order-submission-modal" style={MenuOpen}>
-                <animated.p style={Menup}>Your order has been placed successfully.Please check your email for conformation.</animated.p>
+                <animated.p style={Menup}>Your order has been placed successfully.Please check your email for
+                    conformation.
+                </animated.p>
             </animated.div>
 
 
