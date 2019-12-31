@@ -19,22 +19,33 @@ const LoginComponent = () => {
         }
 
         axios.post(apiPath + "/login", data).then(res => {
-            setSubmitbtn("Submit")
-            if (res.data.idToken) {
-                localStorage.setItem("token", res.data.idToken)
-                let Newtoken = jwt_decode(res.data.idToken);
-                localStorage.setItem("userImg", Newtoken["custom:thumbnail"] ? Newtoken["custom:thumbnail"] : "");
-                window.location.href = "/"
-            }
-            else {
-                seterror(res.data.message)
-                setTimeout(() => {
-                    seterror("")
-                }, 3000)
-            }
+                setSubmitbtn("Submit")
+                if (res.data.idToken) {
+                    let Newtoken = jwt_decode(res.data.idToken);
+                    console.log(Newtoken, "new token")
+                    if (Newtoken && Newtoken["cognito:groups"][0] === "Store") {
+                        localStorage.setItem("token", res.data.idToken)
+                        localStorage.setItem("userImg", Newtoken["custom:thumbnail"] ? Newtoken["custom:thumbnail"] : "");
+                        window.location.href = "/"
+
+                    }
+                    else {
+                        seterror("Invalid Username Or Password")
+                        setTimeout(() => {
+                            seterror("")
+                        }, 3000)
+                    }
+                }
+                else {
+                    seterror(res.data.message)
+                    setTimeout(() => {
+                        seterror("")
+                    }, 3000)
+                }
 
 
-        })
+            }
+        )
 
     }
     const validate = (values) => {

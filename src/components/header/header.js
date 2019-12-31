@@ -14,7 +14,6 @@ const Header = () => {
         localStorage.removeItem("token")
         window.location.href = "/login"
     }
-    let userImg = localStorage.getItem("userImg")
     return (
         <div className="nav-main">
 
@@ -33,7 +32,7 @@ const Header = () => {
                     <Col md={2}>
                         <div className="lougout-div d-flex">
                             <div className="user-img-div"
-                                 style={{backgroundImage: "url(" + (userImg ? userImg : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
+                                 style={{backgroundImage: "url(" + (typeof localStorage!=="undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
                             <div className="logout-dropdown">
                                 {showdown &&
                                 <ul>
