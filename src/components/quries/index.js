@@ -46,3 +46,29 @@ export const getProduct = gql`query GetProduct($id: ID!) {
   }
 }
 `;
+
+export const createOrder = gql `mutation CreateOrder(
+  $input: CreateOrderInput!
+  $condition: ModelOrderConditionInput
+) {
+  createOrder(input: $input, condition: $condition) {
+    id
+    notes
+    status
+    product {
+      id
+      title
+      slug
+      description
+      price
+      thumbnail
+      farm {
+        id
+        name
+        email
+        location
+      }
+    }
+  }
+}
+`;

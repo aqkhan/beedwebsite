@@ -8,6 +8,7 @@ import {listProducts} from "../quries";
 import Loader from "../loader"
 
 const Productspage = () => {
+    
     const [products, setprdocts] = useState(null)
     const [copydata, setcopydata] = useState(null)
     const {data, error} = useQuery(listProducts, {

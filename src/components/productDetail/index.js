@@ -5,18 +5,35 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import {getProduct} from "../quries";
 import {useQuery} from '@apollo/react-hooks';
-import Loader from "../loader"
+import Loader from "../loader";
+import {createOrder} from "../quries";
+import {useMutation} from '@apollo/react-hooks';
+import jwt_decode from "jwt-decode";
+import axios from "axios";
+import {useSpring, animated} from 'react-spring';
 
 const Productdetail = (props) => {
+
     const [date, setDate] = useState(null);
     const [productDetail, setproductDetail] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [price, setprice] = useState(null);
+    const [dateError, setDateError] = useState(false);
     const [totalprice, settotalprice] = useState(null);
+    const [submitOrder] = useMutation(createOrder);
+    const [confirmModal, SetconfirmModal] = useState(false);
+    const [buttonText, SetbuttonText] = useState("PLACE ORDER");
+
     let iniwindow = typeof window !== 'undefined' && window;
     let path = iniwindow && iniwindow.location.search;
     path = path && path.split("=");
     path = path && path[1];
+
+    const MenuOpen = useSpring({
+        delay: confirmModal ? 300 : 0,
+        height: confirmModal ? "100px" : "0px",
+    });
+
     const {data, error} = useQuery(getProduct, {
         variables: {
             id: path
@@ -29,11 +46,13 @@ const Productdetail = (props) => {
             setprice(data.getProduct.price && parseInt(data.getProduct.price));
             settotalprice(data.getProduct.price && parseInt(data.getProduct.price));
         }
-        if(error){
+
+        if (error) {
             localStorage.removeItem("token")
             window.location.href = "/login"
         }
     }, [data]);
+
 
     const decreasequantity = () => {
         if (quantity > 1) {
@@ -41,16 +60,72 @@ const Productdetail = (props) => {
             settotalprice(totalprice - price)
         }
     }
+
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
         settotalprice(totalprice + price)
     }
 
     const submitHandler = (event) => {
+
         event.preventDefault();
+        let token = localStorage.getItem("token");
+        token = token && jwt_decode(token);
+        if (!date) {
+            setDateError(true);
+            setTimeout(() => {
+                setDateError(false)
+            }, 5000)
+        }
+        else {
+            let payload = {
+                variables: {
+                    input: {
+                        orderProductId: path,
+                        notes: "notes",
+                        user_email: token.email,
+                        status: "unconfirmed",
+                        qty: quantity,
+                        delivery_date: date,
+                        order_total: totalprice
+                    }
+                }
+            };
+            SetbuttonText("Loading ...")
+            submitOrder(payload).then(({data}) => {
+                let Newtoken = localStorage.getItem("token");
+                let emailData =
+                    {
+                        orderId: data.createOrder.id
+                    }
+                let header = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${Newtoken}`
+                    }
+                };
+                axios.post("https://bls1feondl.execute-api.us-east-1.amazonaws.com/dev/v1/order/submit", emailData, header,).then(res => {
+                    SetconfirmModal(true);
+                    setQuantity(1);
+                    setDate(null);
+                    settotalprice(price);
+                    setTimeout(() => {
+                        SetconfirmModal(false)
+                    }, 5000);
+                    SetbuttonText("PLACE ORDER")
+
+                }).catch(error => {
+                    SetbuttonText("PLACE ORDER")
+                })
+            }).catch(error => {
+                SetbuttonText("PLACE ORDER")
+            })
+
+
+        }
     }
 
-    return productDetail?  (
+    return productDetail ? (
         <div>
             {
                 productDetail &&
@@ -65,8 +140,7 @@ const Productdetail = (props) => {
                                 <h1 className="title">{productDetail.title && productDetail.title}</h1>
                                 <h1 className="price">{productDetail.price ? "$" + (Math.round(parseInt(productDetail.price) * 100) / 100).toFixed(2) : "N/A"}</h1>
                                 <h1 className="farm-name">{productDetail.farm && productDetail.farm.name}</h1>
-                                {/*<h1 className="product-id">Product Id:000123</h1>*/}
-                                {/*<h1 className="in-stock">In Stock</h1>*/}
+
                             </div>
                             <hr/>
                             <Form onSubmit={(event) => submitHandler(event)}>
@@ -77,7 +151,8 @@ const Productdetail = (props) => {
                                                 <p className="headings">Select Quantity</p>
                                                 <div className="d-flex">
 
-                                                    <div className="add-remove-div" onClick={() => decreasequantity()}>
+                                                    <div className="add-remove-div remove-minus"
+                                                         onClick={() => decreasequantity()}>
                                                         <i className="fa fa-minus"/>
                                                     </div>
 
@@ -97,7 +172,7 @@ const Productdetail = (props) => {
                                                 <p>{totalprice && "$" + (Math.round(totalprice * 100) / 100).toFixed(2)}</p>
                                             </div>
                                         </Col>
-                                        <Col md={6} className="pl-0 date-col">
+                                        <Col md={6} className="pl-0 date-col" id="date-col">
                                             <p className="headings">Delivery Date</p>
                                             <DatePicker
                                                 selected={date && date}
@@ -106,12 +181,17 @@ const Productdetail = (props) => {
                                                 placeholderText="Select Delivery Date"
                                             />
                                             <i className="fa fa-calendar"/>
-
+                                            <div className="date-error">
+                                                {
+                                                    dateError &&
+                                                    <p >Please Select Valid Date.</p>
+                                                }
+                                            </div>
                                         </Col>
                                     </div>
                                 </div>
 
-                                <button className="btn view-more-btn">PLACE ORDER</button>
+                                <button className="btn view-more-btn">{buttonText}</button>
                             </Form>
 
                         </Col>
@@ -125,9 +205,14 @@ const Productdetail = (props) => {
                 </Container>
             }
 
+            <animated.div className="order-submission-modal" style={MenuOpen}>
+                <p>Your order has been placed successfully.Please check your email for conformation.</p>
+            </animated.div>
+
+
             <Style/>
         </div>
 
-    ):<Loader/>
+    ) : <Loader/>
 }
 export default Productdetail
