@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import LoginComponent from "../components/loginpageComponent";
 import Layout from "../components/layout";
-import Loader from "../components/loader"
 const loginPage = () => {
     return (
         <div className="main-login-page">

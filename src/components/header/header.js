@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 import {Container, Col} from "react-bootstrap";
 import Style from "./style";
 import {Link} from "gatsby";
+import Dropdown from "./dropdown"
 
 
 const Header = () => {
@@ -10,9 +11,17 @@ const Header = () => {
 
 
     const Logout = () => {
-        let userToken = localStorage.getItem("token");
         localStorage.removeItem("token")
         window.location.href = "/login"
+    }
+
+    const Showdownfunction = () => {
+        setShowDown(!showdown);
+
+    }
+    const outsideCLick = () => {
+        setShowDown(false);
+
     }
     return (
         <div className="nav-main">
@@ -32,15 +41,15 @@ const Header = () => {
                     <Col md={2}>
                         <div className="lougout-div d-flex">
                             <div className="user-img-div"
-                                 style={{backgroundImage: "url(" + (typeof localStorage!=="undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
+                                 style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
                             <div className="logout-dropdown">
-                                {showdown &&
-                                <ul>
-                                    <li onClick={() => Logout()}>Logout</li>
-                                </ul>
-                                }
-                                <i className={!showdown ? "fa fa-angle-down" : " fa fa-angle-down rotate-arrow"}
-                                   onClick={() => setShowDown(!showdown)}/>
+
+                                <Dropdown
+                                    outside={outsideCLick}
+                                    Logout={Logout}
+                                    Showdownfunction={Showdownfunction}
+                                    showdown={showdown}
+                                />
                             </div>
                         </div>
                     </Col>

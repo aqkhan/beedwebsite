@@ -56,7 +56,7 @@ const Productdetail = (props) => {
             localStorage.removeItem("token")
             window.location.href = "/login"
         }
-    }, [data]);
+    }, [error,data]);
 
 
     const decreasequantity = () => {

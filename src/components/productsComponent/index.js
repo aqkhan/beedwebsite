@@ -8,7 +8,7 @@ import {listProducts} from "../quries";
 import Loader from "../loader"
 
 const Productspage = () => {
-    
+
     const [products, setprdocts] = useState(null)
     const [copydata, setcopydata] = useState(null)
     const {data, error} = useQuery(listProducts, {
@@ -33,7 +33,7 @@ const Productspage = () => {
         if (val) {
 
             val = val.toLowerCase();
-            setprdocts(products && products.filter(sin=>sin.title.toLowerCase().indexOf(val)!== -1))
+            setprdocts(products && products.filter(sin => sin.title.toLowerCase().indexOf(val) !== -1))
         }
         else {
             setprdocts(copydata)
@@ -52,16 +52,9 @@ const Productspage = () => {
                     <Col md={6}>
                         <div className="filter-div">
                             <div className="single-search-div">
-                                <input type="text" placeholder="Search Product" onChange={(event)=>filterSearch(event.target.value)}/>
+                                <input type="text" placeholder="Search Product"
+                                       onChange={(event) => filterSearch(event.target.value)}/>
                                 <i className="fa fa-search"/>
-                            </div>
-                            <div className="single-search-div filter-select">
-                                <select>
-                                    <option>Sort By</option>
-                                    <option>Option one</option>
-                                    <option>Option one</option>
-                                </select>
-                                <i className="fa fa-angle-down"/>
                             </div>
                         </div>
                     </Col>
@@ -75,29 +68,25 @@ const Productspage = () => {
                             return (
 
                                 <Col md={4} key={i}>
-                                    <Link to={"product-detail/?id="+sin.id}>
-                                    <div className="single-product-card">
-                                        <div className="single-product-thumbnaail" style={{  backgroundImage: "url(" + (sin.thumbnail ? sin.thumbnail : "") + ")",}}/>
-                                        <div className="single-product-detail">
-                                            <p className="single-product-title">{sin.title && sin.title}</p>
-                                            <p className="single-product-farm">{sin.farm && sin.farm.name}</p>
-                                            <p className="single-product-price">{price ? "$" + (Math.round(price * 100) / 100).toFixed(2) : "N/A"}</p>
+                                    <Link to={"product-detail/?id=" + sin.id}>
+                                        <div className="single-product-card">
+                                            <div className="single-product-thumbnaail"
+                                                 style={{backgroundImage: "url(" + (sin.thumbnail ? sin.thumbnail : "") + ")",}}/>
+                                            <div className="single-product-detail">
+                                                <p className="single-product-title">{sin.title && sin.title}</p>
+                                                <p className="single-product-farm">{sin.farm && sin.farm.name}</p>
+                                                <p className="single-product-price">{price ? "$" + (Math.round(price * 100) / 100).toFixed(2) : "N/A"}</p>
+                                            </div>
                                         </div>
-                                    </div>
                                     </Link>
                                 </Col>
                             )
                         })
                     }
-
-
-                </div>
-                <div className="cards-button-div d-flex justify-content-center">
-                    <button className="btn view-more-btn">View More</button>
                 </div>
                 <Style/>
             </Container>
         </div>
-    ):<Loader/>
+    ) : <Loader/>
 }
 export default Productspage
