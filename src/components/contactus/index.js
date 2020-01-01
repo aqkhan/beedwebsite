@@ -18,12 +18,12 @@ function ContactUs() {
                         <input type="email" className="form-control" name="email" data-form-field="Email" required="" id="email-form1-4"/>
                     </div>
                 </Col>
-                <div className="col-md-4 multi-horizontal" data-for="phone">
+                <Col md={4}  className="multi-horizontal" data-for="phone">
                     <div className="form-group">
                         <label className="form-control-label mbr-fonts-style display-7">Phone</label>
                         <input type="tel" className="form-control" name="phone" data-form-field="Phone" id="phone-form1-4"/>
                     </div>
-                </div>
+                </Col>
             </Row>
             <div className="form-group" data-for="message">
                 <label className="form-control-label mbr-fonts-style display-7" >Message</label>

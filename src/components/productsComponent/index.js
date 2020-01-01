@@ -9,8 +9,8 @@ import Loader from "../loader"
 
 const Productspage = () => {
 
-    const [products, setprdocts] = useState(null)
-    const [copydata, setcopydata] = useState(null)
+    const [products, setprdocts] = useState(null);
+    const [copydata, setcopydata] = useState(null);
     const {data, error} = useQuery(listProducts, {
         variables: {
             limit: 1000
@@ -19,7 +19,7 @@ const Productspage = () => {
 
     useEffect(() => {
         if (error) {
-            localStorage.removeItem("token")
+            localStorage.removeItem("token");
             window.location.href = "/login"
         }
         if (data && data.listProducts.items) {
