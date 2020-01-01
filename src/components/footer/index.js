@@ -1,6 +1,7 @@
 import React from "react";
 import {Container, Row, Col} from "react-bootstrap";
-import Style from "./style"
+import Style from "./style";
+import {Link} from "gatsby";
 const footer = () => {
 
    return (
@@ -12,8 +13,8 @@ const footer = () => {
                             <div className="footer-one">
                                 <p>About</p>
                                 <ul>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                                    <li><Link to="/terms-and-conditions">Terms & Conditions</Link></li>
                                 </ul>
                             </div>
 
@@ -22,8 +23,7 @@ const footer = () => {
                             <div className="footer-one">
                                 <p>Services</p>
                                 <ul>
-                                    <li><a href="/">Our Products</a></li>
-
+                                    <li><Link to="/">Our Products</Link></li>
                                 </ul>
                             </div>
 

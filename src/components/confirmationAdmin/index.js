@@ -13,8 +13,7 @@ const ConfirmComponent = () => {
         path = path && path.split("=");
         path = path && path[1];
 
-        let submirData =
-            {
+        let submirData = {
                 orderId: path
             }
         axios.post("https://bls1feondl.execute-api.us-east-1.amazonaws.com/dev/v1/admin/order/confirm", submirData).then(res => {
@@ -36,10 +35,10 @@ const ConfirmComponent = () => {
                             success ?
                                 <div className="details">
                                     <h1>Congratulations!</h1>
-                                    <p>Your order has been confirmed.</p>
+                                    <p>This order has been confirmed.</p>
                                 </div> : <div className="details">
                                 <h1 className="confirmation-soory">Sorry!</h1>
-                                <p>Your order could not be confirmed. Please contact your provider</p>
+                                <p>This order could not be confirmed. Please contact your provider</p>
                             </div>
                         }
                     </div> : <Loader/>

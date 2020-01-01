@@ -28,13 +28,12 @@ const Header = () => {
 
             <Container className="p-0">
                 <div className="main-nav d-flex align-items-center justify-content-between">
-                    <Col md={2}><Link to={"/"}><img src="https://i.ibb.co/V91VVb0/logoth.png"
+                    <Col md={5}><Link to={"/"}><img src="https://i.ibb.co/V91VVb0/logoth.png"
                                                     className="logo-img"/></Link></Col>
-                    <Col md={5}>
+                    <Col md={4}>
                         <ul className="header-list">
                             <li><Link to={"/"}>HOME</Link></li>
-                            <li>STORE</li>
-                            <li>PAGES</li>
+                            <li><Link to="/about-us">ABOUT US</Link></li>
                             <li>CONTACT</li>
                         </ul>
                     </Col>

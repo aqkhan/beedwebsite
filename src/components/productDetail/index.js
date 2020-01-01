@@ -11,6 +11,7 @@ import {useMutation} from '@apollo/react-hooks';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import {useSpring, animated} from 'react-spring';
+import SEO from "../../components/seo";
 
 const Productdetail = (props) => {
 
@@ -137,6 +138,7 @@ const Productdetail = (props) => {
 
     return productDetail ? (
         <div>
+            <SEO title={productDetail.title && productDetail.title}/>
             {
                 productDetail &&
                 <Container className="product-detail-container">
@@ -213,8 +215,7 @@ const Productdetail = (props) => {
                     </div>
                     <div className="product-detail">
                         <h1>Product Detail</h1>
-                        <p
-                            dangerouslySetInnerHTML={{__html: productDetail.description && productDetail.description}}
+                        <div dangerouslySetInnerHTML={{__html: productDetail.description && productDetail.description}}
                         />
                     </div>
                 </Container>
