@@ -78,5 +78,116 @@ transform: rotateZ(-180deg);
     padding-top: 15px;
     z-index:2;
 }
+.user-img-list{
+    font-size: 11px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.6);
+    padding: 15px 20px;
+    width: 100%;
+}
+
+
+
+
+
+.burger-button {
+  position: absolute;
+    top: 0vh;
+    right: 2vh;
+  z-index: 9;
+  padding:5px;
+}
+/*this is where you can chand the color of the buttons*/
+.burger-button span{
+  width: 28px;
+  border: 1px solid #9dbd3a;
+  background-color: #9dbd3a;
+  display: block;
+  border-radius: 22px;
+  transition: 0.2s;
+}
+.burger-button.active span{
+/*   border-color: green; */
+  background-color:#9dbd3a;
+}
+
+.burger-top, .burger-bottom{
+  position: absolute;
+}
+
+.burger-top{
+  top: -02px;
+}
+
+.burger-bottom{
+  bottom: -02px;
+}
+/* make sure this has the same top as the burger button has padding*/
+.burger-button.active .burger-top{
+  position: absolute;
+  top: 5px;
+  transform: rotateZ(45deg);
+}
+
+.burger-button.active .burger-middle{
+/*   transform: rotateZ(270deg); */
+  border-color: rgba(0,0,0,0);
+  background-color:rgba(0,0,0,0);
+}
+
+/* make sure this has the same bottom as the burger button has padding*/
+
+.burger-button.active .burger-bottom{
+  position: absolute;
+  bottom: 5px;
+  transform: rotateZ(-45deg);
+}
+
+.burger-menu {
+    display: flex;
+    position: fixed;
+    top: -100vh;
+    left:0;
+    right: 0;
+    bottom: 100vh;
+    background-color: #f9f9f9;
+    padding:5px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+    z-index: 8;
+    // transition:0.2s;
+    align-content:space-around;
+  justify-content:space-around;
+  flex-direction:column;
+}
+.burger-menu.active{
+  top:0;
+  bottom:0;
+}
+ .hide-res-list {
+        display: none !important;
+    }
+       .ham-nav {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .show-res-list {
+        display: flex !important;
+    }
+.responsive-nav-div{
+animation: slide 0.2s ;
+  animation-direction: alternate;
+}
+   @keyframes slide {
+  from {left: -100vw;}
+  to {left: 0vw;}
+}
+.responsove-header{
+display:none
+}
+ .responsive-nav-div ul li a{
+        color: white!important;
+            font-weight: 600;
+    }
+
   `}</style>
 );

@@ -177,8 +177,8 @@ const Productdetail = (props) => {
                                                 </div>
                                             </div>
                                         </Col>
-                                        <Col md={6}>
-                                            <p className="headings">Select Quantity</p>
+                                        <Col md={6} className="pl-0 grand-total">
+                                            <p className="headings">Grand Total</p>
                                             <div className="changing-price">
                                                 <p className="headings">Total</p>
                                                 <p>{totalprice && "$" + (Math.round(totalprice * 100) / 100).toFixed(2)}</p>
