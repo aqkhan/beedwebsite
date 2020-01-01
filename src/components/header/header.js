@@ -1,25 +1,63 @@
-import React from "react"
-import {Navbar, Nav,Container} from "react-bootstrap";
-import Style from "./style"
+import React, {useState, useEffect} from "react"
+import {Container, Col} from "react-bootstrap";
+import Style from "./style";
+import {Link} from "gatsby";
+import Dropdown from "./dropdown"
+
+
 const Header = () => {
 
-    const Logout = () =>{
-        localStorage.removeItem("beedUser");
+    const [showdown, setShowDown] = useState(false);
+
+
+    const Logout = () => {
+        localStorage.removeItem("token")
         window.location.href = "/login"
     }
+
+    const Showdownfunction = () => {
+        setShowDown(!showdown);
+
+    }
+    const outsideCLick = () => {
+        setShowDown(false);
+
+    }
     return (
-        <div>
-            <Navbar bg="light" expand="lg">
-                <Container>
-                <Navbar.Brand href="/">Beed</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto w-100 justify-content-end">
-                        <Nav.Link onClick={()=>Logout()}>Logout</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>
+        <div className="nav-main">
+
+            <Container className="p-0">
+                <div className="main-nav d-flex align-items-center justify-content-between">
+                    <Col md={2}><Link to={"/"}><img src="https://i.ibb.co/V91VVb0/logoth.png"
+                                                    className="logo-img"/></Link></Col>
+                    <Col md={5}>
+                        <ul className="header-list">
+                            <li><Link to={"/"}>HOME</Link></li>
+                            <li>STORE</li>
+                            <li>PAGES</li>
+                            <li>CONTACT</li>
+                        </ul>
+                    </Col>
+                    <Col md={2}>
+                        <div className="lougout-div d-flex">
+                            <div className="user-img-div"
+                                 style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
+                            <div className="logout-dropdown">
+
+                                <Dropdown
+                                    outside={outsideCLick}
+                                    Logout={Logout}
+                                    Showdownfunction={Showdownfunction}
+                                    showdown={showdown}
+                                />
+                            </div>
+                        </div>
+                    </Col>
+
+                </div>
+
+            </Container>
+
             <Style/>
         </div>
     )
