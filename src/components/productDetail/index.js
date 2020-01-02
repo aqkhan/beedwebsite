@@ -57,7 +57,7 @@ const Productdetail = (props) => {
             localStorage.removeItem("token")
             window.location.href = "/login"
         }
-    }, [error,data]);
+    }, [error, data]);
 
 
     const decreasequantity = () => {
@@ -97,7 +97,7 @@ const Productdetail = (props) => {
                     }
                 }
             };
-            SetbuttonText("Loading ...")
+            SetbuttonText("PLEASE WAIT ...")
             submitOrder(payload).then(({data}) => {
                 let Newtoken = localStorage.getItem("token");
                 let emailData =
@@ -116,7 +116,8 @@ const Productdetail = (props) => {
                     setDate(null);
                     settotalprice(price);
                     setTimeout(() => {
-                        SetconfirmModal(false)
+                        SetconfirmModal(false);
+
                     }, 5000);
                     SetbuttonText("PLACE ORDER")
 
@@ -152,7 +153,6 @@ const Productdetail = (props) => {
                                 <h1 className="title">{productDetail.title && productDetail.title}</h1>
                                 <h1 className="price">{productDetail.price ? "$" + (Math.round(parseInt(productDetail.price) * 100) / 100).toFixed(2) : "N/A"}</h1>
                                 <h1 className="farm-name">{productDetail.farm && productDetail.farm.name}</h1>
-
                             </div>
                             <hr/>
                             <Form onSubmit={(event) => submitHandler(event)}>
@@ -167,7 +167,6 @@ const Productdetail = (props) => {
                                                          onClick={() => decreasequantity()}>
                                                         <i className="fa fa-minus"/>
                                                     </div>
-
                                                     <input type="number"
                                                            onChange={(event) => setQuantity(event.target.value)}
                                                            value={quantity} min={1}/>

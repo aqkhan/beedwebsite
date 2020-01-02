@@ -29,16 +29,12 @@ const Productspage = () => {
     }, [data, error]);
 
     const filterSearch = (val) => {
-
         if (val) {
-
-            val = val.toLowerCase();
-            setprdocts(products && products.filter(sin => sin.title.toLowerCase().indexOf(val) !== -1))
+            setprdocts(copydata && [...copydata.filter(sin => sin.title.toLowerCase().indexOf(val.toLowerCase()) !== -1)])
         }
         else {
             setprdocts(copydata)
         }
-
     }
 
     return data ? (
@@ -62,9 +58,8 @@ const Productspage = () => {
 
                 <div className="d-flex flex-wrap">
                     {
-                        products && products.map((sin, i) => {
+                        products && products.length !==0 ? products.map((sin, i) => {
                             let price = sin.price && parseInt(sin.price);
-
                             return (
 
                                 <Col md={4} key={i}>
@@ -81,7 +76,8 @@ const Productspage = () => {
                                     </Link>
                                 </Col>
                             )
-                        })
+                        }):
+                            <h1 style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No Products Found</h1>
                     }
                 </div>
                 <Style/>
