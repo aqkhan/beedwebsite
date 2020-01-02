@@ -8,8 +8,8 @@ import jwt_decode from "jwt-decode";
 const ContactUs = () => {
     const [confirmModal, SetconfirmModal] = useState(false);
     const [buttonText, SetbuttonText] = useState("SUBMIT");
-    let token = localStorage.getItem("token");
-    token = jwt_decode(token);
+    let token = typeof window !== 'undefined' && window.localStorage.getItem("token");
+    token = token && jwt_decode(token);
     let phoneNumer = token && token.phone_number ? token.phone_number : "";
     let email = token && token.email ? token.email : "";
     const MenuOpen = useSpring({
@@ -57,6 +57,7 @@ const ContactUs = () => {
 
     return (
         <Container className="mt-165">
+
             <Formik validateOnChange={false} initialValues={{
                 name: '',
                 email: email,
