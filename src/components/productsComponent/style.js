@@ -50,6 +50,10 @@ outline:none!important;
        padding: 2px 110px 2px 2px;
 
 }
+
+.filter-select{
+  margin-left: 20px;
+}
 .filter-section{
     padding: 30px 0px;
 }

@@ -5,21 +5,30 @@ import {formPath} from "../../../config";
 import axios from "axios";
 import {useSpring, animated} from 'react-spring';
 import jwt_decode from "jwt-decode";
+
 const ContactUs = () => {
+
     const [confirmModal, SetconfirmModal] = useState(false);
     const [buttonText, SetbuttonText] = useState("SUBMIT");
+
+
     let token = typeof window !== 'undefined' && window.localStorage.getItem("token");
     token = token && jwt_decode(token);
     let phoneNumer = token && token.phone_number ? token.phone_number : "";
     let email = token && token.email ? token.email : "";
+
+
     const MenuOpen = useSpring({
         delay: confirmModal ? 300 : 0,
         height: confirmModal ? "100px" : "0px",
     });
+
+
     const Menup = useSpring({
         delay: confirmModal ? 1000 : 0,
         display: confirmModal ? "block" : "none",
     });
+
 
     const SubmitHandler = (values, resetForm) => {
         SetbuttonText("PLEASE WAIT ...")
@@ -38,6 +47,8 @@ const ContactUs = () => {
         })
         resetForm();
     }
+
+
     const validate = (values) => {
 
         const errors = {};
@@ -54,6 +65,7 @@ const ContactUs = () => {
 
         return errors;
     }
+
 
     return (
         <Container className="mt-165">

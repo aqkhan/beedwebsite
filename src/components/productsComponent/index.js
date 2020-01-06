@@ -4,19 +4,22 @@ import Style from "./style";
 import {Link} from "gatsby";
 import Mainsction from "../homeMain";
 import {useQuery} from '@apollo/react-hooks';
-import {listProducts} from "../quries";
+import {listProducts, listFarms} from "../quries";
 import Loader from "../loader"
 
 const Productspage = () => {
 
     const [products, setprdocts] = useState(null);
     const [copydata, setcopydata] = useState(null);
-    const {data, error} = useQuery(listProducts, {
+    const [farms, setfarms] = useState(null);
+    const {data, error} = useQuery(listProducts, listFarms, {
         variables: {
             limit: 1000
         }
     });
 
+
+    const farmsList = useQuery(listFarms);
     useEffect(() => {
         if (error) {
             localStorage.removeItem("token");
@@ -26,7 +29,11 @@ const Productspage = () => {
             setprdocts(data.listProducts.items);
             setcopydata(data.listProducts.items);
         }
-    }, [data, error]);
+        if (farmsList && farmsList.data && farmsList.data.listFarms.items) {
+            setfarms(farmsList.data.listFarms.items)
+        }
+
+    }, [data, error, farmsList]);
 
     const filterSearch = (val) => {
         if (val) {
@@ -35,6 +42,18 @@ const Productspage = () => {
         else {
             setprdocts(copydata)
         }
+    }
+
+    const filterFromSelect = (val) => {
+
+           if (val) {
+               setprdocts(copydata && [...copydata.filter(sin => sin.farm.id === val)])
+           }
+           else {
+               setprdocts(copydata)
+           }
+
+
     }
 
     return data ? (
@@ -52,13 +71,30 @@ const Productspage = () => {
                                        onChange={(event) => filterSearch(event.target.value)}/>
                                 <i className="fa fa-search"/>
                             </div>
+                            <div className="single-search-div filter-select">
+                                <select onChange={(event) => filterFromSelect(event.target.value)}>
+                                    <option value="" onChange={(event) => filterFromSelect(event.target.value)}>Select
+                                        Farm
+                                    </option>
+                                    {
+                                        farms && farms.map((sin, i) => {
+                                            return (
+
+                                                <option value={sin.id} key={i}>{sin.name}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                                <i className="fa fa-angle-down"/>
+                            </div>
                         </div>
                     </Col>
                 </Col>
 
                 <div className="d-flex flex-wrap">
                     {
-                        products && products.length !==0 ? products.map((sin, i) => {
+                        products && products.length !== 0 ? products.map((sin, i) => {
+
                             let price = sin.price && parseInt(sin.price);
                             return (
 
@@ -76,8 +112,8 @@ const Productspage = () => {
                                     </Link>
                                 </Col>
                             )
-                        }):
-                            <h1 style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No Products Found</h1>
+                        }) :
+                            <h1 style={{textAlign: "center", width: "100%", fontSize: "20px"}}>No Products Found</h1>
                     }
                 </div>
                 <Style/>

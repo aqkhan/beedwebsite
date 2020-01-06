@@ -72,3 +72,22 @@ export const createOrder = gql `mutation CreateOrder(
   }
 }
 `;
+export const listFarms =  gql `query ListFarms(
+  $filter: ModelFarmFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFarms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      email
+      location
+      products {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
