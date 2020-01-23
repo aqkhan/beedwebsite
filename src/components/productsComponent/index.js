@@ -5,7 +5,8 @@ import {Link} from "gatsby";
 import Mainsction from "../homeMain";
 import {useQuery} from '@apollo/react-hooks';
 import {listProducts, listFarms} from "../quries";
-import Loader from "../loader"
+import Loader from "../loader";
+import CardLoader from "../commonComponents/cardLoader"
 
 const Productspage = () => {
 
@@ -17,7 +18,6 @@ const Productspage = () => {
             limit: 1000
         }
     });
-
 
     const farmsList = useQuery(listFarms);
     useEffect(() => {
@@ -46,17 +46,17 @@ const Productspage = () => {
 
     const filterFromSelect = (val) => {
 
-           if (val) {
-               setprdocts(copydata && [...copydata.filter(sin => sin.farm.id === val)])
-           }
-           else {
-               setprdocts(copydata)
-           }
+        if (val) {
+            setprdocts(copydata && [...copydata.filter(sin => sin.farm.id === val)])
+        }
+        else {
+            setprdocts(copydata)
+        }
 
 
     }
 
-    return data ? (
+    return (
         <div>
             <Mainsction/>
             <Container className="products-container">
@@ -91,34 +91,40 @@ const Productspage = () => {
                     </Col>
                 </Col>
 
-                <div className="d-flex flex-wrap">
-                    {
-                        products && products.length !== 0 ? products.map((sin, i) => {
 
-                            let price = sin.price && parseInt(sin.price);
-                            return (
+                {
+                    data ?
+                        <div className="d-flex flex-wrap">
+                            {
+                                products && products.length !== 0 ? products.map((sin, i) => {
 
-                                <Col md={4} key={i}>
-                                    <Link to={"product-detail/?id=" + sin.id}>
-                                        <div className="single-product-card">
-                                            <div className="single-product-thumbnaail"
-                                                 style={{backgroundImage: "url(" + (sin.thumbnail ? sin.thumbnail : "") + ")",}}/>
-                                            <div className="single-product-detail">
-                                                <p className="single-product-title">{sin.title && sin.title}</p>
-                                                <p className="single-product-farm">{sin.farm && sin.farm.name}</p>
-                                                <p className="single-product-price">{price ? "$" + (Math.round(price * 100) / 100).toFixed(2) : "N/A"}</p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </Col>
-                            )
-                        }) :
-                            <h1 style={{textAlign: "center", width: "100%", fontSize: "20px"}}>No Products Found</h1>
-                    }
-                </div>
+                                    let price = sin.price && parseInt(sin.price);
+                                    return (
+
+                                        <Col md={4} key={i}>
+                                            <Link to={"product-detail/?id=" + sin.id}>
+                                                <div className="single-product-card">
+                                                    <div className="single-product-thumbnaail"
+                                                         style={{backgroundImage: "url(" + (sin.thumbnail ? sin.thumbnail : "") + ")",}}/>
+                                                    <div className="single-product-detail">
+                                                        <p className="single-product-title">{sin.title && sin.title}</p>
+                                                        <p className="single-product-farm">{sin.farm && sin.farm.name}</p>
+                                                        <p className="single-product-price">{price ? "$" + (Math.round(price * 100) / 100).toFixed(2) : "N/A"}</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </Col>
+                                    )
+                                }) :
+                                    <h1 style={{textAlign: "center", width: "100%", fontSize: "20px"}}>No Products
+                                        Found</h1>
+                            }
+                        </div> :  <div className="d-flex"> <CardLoader/><CardLoader/><CardLoader/></div>
+                }
+
                 <Style/>
             </Container>
         </div>
-    ) : <Loader/>
+    )
 }
 export default Productspage

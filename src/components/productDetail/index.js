@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import {useSpring, animated} from 'react-spring';
 import SEO from "../../components/seo";
+import MainLaoder from "../commonComponents/mainLoader"
 
 const Productdetail = (props) => {
 
@@ -139,10 +140,12 @@ const Productdetail = (props) => {
 
     return productDetail ? (
         <div>
-            <SEO title={productDetail.title && productDetail.title}/>
+            {/*<SEO title={productDetail.title && productDetail.title}/>*/}
             {
                 productDetail &&
                 <Container className="product-detail-container">
+
+
                     <div className="d-flex flex-wrap">
                         <Col md={5}>
                             <div className="product-image"
@@ -212,6 +215,8 @@ const Productdetail = (props) => {
 
                         </Col>
                     </div>
+
+
                     <div className="product-detail">
                         <h1>Product Detail</h1>
                         <div dangerouslySetInnerHTML={{__html: productDetail.description && productDetail.description}}
@@ -230,6 +235,6 @@ const Productdetail = (props) => {
             <Style/>
         </div>
 
-    ) : <Loader/>
+    ) : <div className="d-flex justify-content-center"><MainLaoder/></div>
 }
 export default Productdetail

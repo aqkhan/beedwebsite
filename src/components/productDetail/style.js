@@ -4,6 +4,7 @@ export default () => (
     <style jsx="true">{`
 .product-detail-container{
  margin-top: 165px;
+
 }
 .product-image{
 min-height:450px;

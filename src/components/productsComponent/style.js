@@ -48,7 +48,6 @@ outline:none!important;
 }
 .filter-select select{
        padding: 2px 110px 2px 2px;
-
 }
 
 .filter-select{

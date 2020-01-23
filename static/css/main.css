@@ -18,6 +18,14 @@ body {
     z-index: 2;
 
 }
+.card-loader{
+    width: 430px;
+}
+.main-loader-div svg{
+  width: 1000px;
+
+}
+
 
 .main-login-page .nav-main {
     display: none !important;
