@@ -43,7 +43,8 @@ background-color:#f6f6f6;
     .content-div img{
        position: absolute;
     right: 0;
-    top: 45px;
+    top: 80px;
+    width: 445px;
     }
   `}</style>
 );
