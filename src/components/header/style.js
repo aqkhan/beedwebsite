@@ -220,16 +220,15 @@ display:none
     justify-content: space-between;
 }
 .dropdown-list {
-position:absolute;
-
+    position: absolute;
     background-color: #9dbd3a;
-
     color: white;
     min-width: 200px;
-    top: 41px;
+    top: 45px;
     padding-left: 0;
     list-style: none;
     text-align: center;
+    right: 1px;
 }
 .dropdown-list  li{
     width: 100%;
