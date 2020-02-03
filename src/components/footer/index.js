@@ -30,9 +30,9 @@ const footer = () => {
                         </Col>
                         <Col md={5} sm={12}>
                             <div className="footer-one">
-                                <p>Footer Header</p>
+                                <p>Trap House Connection</p>
                                 <span>
-                                 Extra space for a call to action inside the footer that could help re-engage users.
+                                 We connect stores with the farms for hassle free ordering of skews from the Farms.
                              </span>
                                 <div className="d-flex">
                                     <div className="d-flex align-items-center single-link"><i

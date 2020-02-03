@@ -24,6 +24,7 @@ footer p{
  font-size: 22px;
  color: rgba(0,0,0,.87);
  font-weight: 700;
+ font-family: 'Roboto Slab', serif;
 }
 footer .single-link{
 margin:10px 8px;
