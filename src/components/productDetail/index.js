@@ -216,9 +216,9 @@ const Productdetail = (props) => {
                         </Col>
                     </div>
 
-
+                    <h1 className="detail-heading-1">Product Detail</h1>
                     <div className="product-detail">
-                        <h1>Product Detail</h1>
+
                         <div dangerouslySetInnerHTML={{__html: productDetail.description && productDetail.description}}
                         />
                     </div>

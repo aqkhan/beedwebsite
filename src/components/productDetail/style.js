@@ -85,10 +85,13 @@ margin-top:40px
 margin-left:10px;
 }
 .product-detail{
-    padding-top: 60px;
+    background: #F6F6F6;
+    padding: 40px 40px;
 }
-.product-detail h1{
-    padding-top: 60px;
+.detail-heading-1{
+    padding: 62px 0 15px 10px;
+    font-family: 'Roboto Slab', serif;
+
 }
 .view-more-btn{
     background-color: #9dbd3a;

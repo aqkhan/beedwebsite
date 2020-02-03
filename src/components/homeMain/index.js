@@ -5,20 +5,19 @@ import Background from "../../images/home-Main.png"
 const Homemain = () => {
     return (
 
-        <div className="main-header" >
+        <div className="main-header">
             <Container>
-            <div className="content-div"
-                 // style={{backgroundImage: `url(${Background})`}}
-            >
-                <div className="header-main-text-desc">
-                    <h1>ORDER STRAIN DIRECTLY
-                        FROM THE FARM <br/><span className="span2">HASSLE FREE!</span></h1>
-                    <img src={require("../../images/home-Main.png")}/>
-                    {/*<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has*/}
-                        {/*been the industry's standard dummy text ever since the 1500s, when an unknown printer took a*/}
-                        {/*galley of type and scrambled it to make a type specimen book.</p>*/}
+                <div className="content-div"
+                    // style={{backgroundImage: `url(${Background})`}}
+                >
+                    <div className="header-main-text-desc">
+                        <h1>ORDER SKEWS DIRECTLY
+                            FROM THE FARMS<br/><span className="span2">HASSLE FREE!</span></h1>
+                        <img src={require("../../images/home-Main.png")}/>
+                        <p>Trap house connection makes it easy to order skews from your favorite farms. We automate the
+                            ordering and fulfillment process so you can focus on selling and getting customers.</p>
+                    </div>
                 </div>
-            </div>
             </Container>
             <Style/>
         </div>

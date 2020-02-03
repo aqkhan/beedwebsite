@@ -6,6 +6,7 @@ export default () => (
 font-size:50px;
 font-weight:bold;
 font-family: 'Roboto Slab', serif;
+ line-height: normal;
 }
 .header-main-text-desc .span1{
 color: #7c8945;
