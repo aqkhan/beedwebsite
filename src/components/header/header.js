@@ -41,21 +41,29 @@ const Header = () => {
                 <div className="main-nav d-flex align-items-center justify-content-between">
                     <Col md={5}><Link to={"/"}><img src="https://i.ibb.co/V91VVb0/logoth.png"
                                                     className="logo-img"/></Link></Col>
-                    <Col md={6} className="header-list-col p-0">
+                    <Col md={4} className="header-list-col p-0">
                         <ul className="header-list">
                             <li><Link to={"/"}>HOME</Link></li>
                             <li><Link to="/about-us">ABOUT US</Link></li>
                             <li><Link to="/contact-us">CONTACT</Link></li>
-                            <li>
+                            <li className="new-drop-li">
                                 <div className="user-img-div"
                                      style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : PlaceHolder) + ")",}}/>
+                                <Dropdown
+                                    outside={outsideCLick}
+                                    Logout={Logout}
+                                    Showdownfunction={Showdownfunction}
+                                    showdown={showdown}
+                                />
                             </li>
-                            <li><Dropdown
-                                outside={outsideCLick}
-                                Logout={Logout}
-                                Showdownfunction={Showdownfunction}
-                                showdown={showdown}
-                            /></li>
+                            {/*<li>*/}
+                            {/*<Dropdown*/}
+                            {/*outside={outsideCLick}*/}
+                            {/*Logout={Logout}*/}
+                            {/*Showdownfunction={Showdownfunction}*/}
+                            {/*showdown={showdown}*/}
+                            {/*/>*/}
+                            {/*</li>*/}
                         </ul>
                     </Col>
                     {/*<Col md={2} className="header-img-col">*/}

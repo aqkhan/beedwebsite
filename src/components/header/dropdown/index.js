@@ -14,17 +14,15 @@ class HeaderDropdown extends Component {
                     showdown &&
                     <ul className="dropdown-list">
 
-                        <li><i style={{marginRight:"8px"}} className="fa fa-tachometer"/> Dashboard</li>
-                        <li><i style={{marginRight:"10px"}} className="fa fa-user"/> Profile</li>
-                        <li onClick={() => Logout()}> <i style={{marginRight:"10px"}} className="fa fa-sign-out"/> Logout</li>
+                        <li> Dashboard</li>
+                        <li>Profile</li>
+                        <li onClick={() => Logout()}>Logout</li>
                     </ul>
 
                 }
-                <button className="btn dropdown-button d-flex" onClick={() => Showdownfunction() }>
-                    More
-                    <i className={!showdown ? "fa fa-angle-down" : " fa fa-angle-down rotate-arrow"}
+                    <i onClick={() => Showdownfunction() } className={!showdown ? "fa fa-angle-down" : " fa fa-angle-down rotate-arrow"}
                        />
-                </button>
+
             </div>
         )
     }

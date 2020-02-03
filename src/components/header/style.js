@@ -240,6 +240,15 @@ position:absolute;
         // background-color:#03ca06;
             padding: 6px;
 }
+.new-drop-li{
+    display: flex;
+    align-items: center;
+}
+.new-drop-li i{
+      font-size: 32px;
+    margin-left: 10px;
+    color:#8b9900;
+}
 
   `}</style>
 );
