@@ -27,6 +27,7 @@ list-style:none;
 display: flex;
 justify-content: space-between;
 margin-bottom:0;
+    align-items: center;
 }
 .header-list li{
 float:left;
@@ -41,7 +42,7 @@ text-decoration:none!important;
 height:50px;
 width:50px;
 border-radius:50%;
-background-image:url("http://amp.beantownthemes.com/interior/wp-content/uploads/sites/6/team1.jpg");
+// background-image:url("http://amp.beantownthemes.com/interior/wp-content/uploads/sites/6/team1.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -58,6 +59,8 @@ left: 10px;
 }
 .logout-dropdown{
 position:relative;
+    display: flex;
+    align-items: center;
 }
 .logout-dropdown li{
 cursor:pointer;
@@ -188,6 +191,55 @@ display:none
         color: white!important;
             font-weight: 600;
     }
+    .logout-button{
+      background-color: #638a22;
+      color:white;
+          border: none;
+    outline: none;
+    padding: 5px 24px;
+    border-radius: 4px;
+    }
+    .dropdown-button{
+    background-color:#9dbd3a;
+    align-items: center;
+    color: white;
+    min-width: 200px;
+    justify-content: space-between;
+    outline:none!important;
+     border-radius: 0px;
+}
+.dropdown-button:focus{
+ outline:none!important;
+ box-shadow:none
+}
+.dropdown-button:hover{
+    background-color:#9dbd3a;
+    align-items: center;
+    color: white;
+
+    justify-content: space-between;
+}
+.dropdown-list {
+position:absolute;
+
+    background-color: #9dbd3a;
+
+    color: white;
+    min-width: 200px;
+    top: 41px;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+.dropdown-list  li{
+    width: 100%;
+    text-align: left;
+    padding-left: 15px;
+    font-weight:normal!important;
+        border-bottom: 1px solid white;
+        // background-color:#03ca06;
+            padding: 6px;
+}
 
   `}</style>
 );

@@ -32,6 +32,8 @@ text-decoration:none!important;
 .single-search-div{
     border: 1px solid #bcbdbd;
    padding: 2px 6px;
+       display: flex;
+    align-items: center;
 }
 .single-search-div input,.single-search-div select{
 border:none!important;

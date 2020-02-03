@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react"
 import {Container, Col} from "react-bootstrap";
 import Style from "./style";
 import {Link} from "gatsby";
-import Dropdown from "./dropdown"
+import Dropdown from "./dropdown";
+import PlaceHolder from "../../images/placeholder.png"
 
 
 const Header = () => {
@@ -40,28 +41,38 @@ const Header = () => {
                 <div className="main-nav d-flex align-items-center justify-content-between">
                     <Col md={5}><Link to={"/"}><img src="https://i.ibb.co/V91VVb0/logoth.png"
                                                     className="logo-img"/></Link></Col>
-                    <Col md={4} className="header-list-col">
+                    <Col md={6} className="header-list-col p-0">
                         <ul className="header-list">
                             <li><Link to={"/"}>HOME</Link></li>
                             <li><Link to="/about-us">ABOUT US</Link></li>
                             <li><Link to="/contact-us">CONTACT</Link></li>
+                            <li>
+                                <div className="user-img-div"
+                                     style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : PlaceHolder) + ")",}}/>
+                            </li>
+                            <li><Dropdown
+                                outside={outsideCLick}
+                                Logout={Logout}
+                                Showdownfunction={Showdownfunction}
+                                showdown={showdown}
+                            /></li>
                         </ul>
                     </Col>
-                    <Col md={2} className="header-img-col">
-                        <div className="lougout-div d-flex">
-                            <div className="user-img-div"
-                                 style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
-                            <div className="logout-dropdown">
+                    {/*<Col md={2} className="header-img-col">*/}
+                    {/*<div className="lougout-div d-flex">*/}
+                    {/*<div className="user-img-div"*/}
+                    {/*style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : PlaceHolder) + ")",}}/>*/}
+                    {/*<div className="logout-dropdown">*/}
 
-                                <Dropdown
-                                    outside={outsideCLick}
-                                    Logout={Logout}
-                                    Showdownfunction={Showdownfunction}
-                                    showdown={showdown}
-                                />
-                            </div>
-                        </div>
-                    </Col>
+                    {/*<Dropdown*/}
+                    {/*outside={outsideCLick}*/}
+                    {/*Logout={Logout}*/}
+                    {/*Showdownfunction={Showdownfunction}*/}
+                    {/*showdown={showdown}*/}
+                    {/*/>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</Col>*/}
                     <Col md={7} className="responsove-header p-0">
                         <div className="ham-nav" onClick={() => responsiveFunction()}>
                             <div className={"burger-button " + ham}>
@@ -77,7 +88,7 @@ const Header = () => {
                             <ul>
                                 <li className="user-img-list">
                                     <div className="user-img-div"
-                                         style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png") + ")",}}/>
+                                         style={{backgroundImage: "url(" + (typeof localStorage !== "undefined" && localStorage.getItem("userImg") ? localStorage.getItem("userImg") : PlaceHolder) + ")",}}/>
                                 </li>
                                 <li><Link to={"/"}>HOME</Link></li>
                                 <li><Link to="/about-us">ABOUT US</Link></li>
@@ -86,8 +97,6 @@ const Header = () => {
                             </ul>
                         </div>
                     </Col>
-
-
 
 
                 </div>

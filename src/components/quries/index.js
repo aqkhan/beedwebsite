@@ -3,10 +3,9 @@ import gql from 'graphql-tag';
 
 export const listProducts = gql`query ListProducts(
   $filter: ModelProductFilterInput
-  $limit: Int
   $nextToken: String
 ) {
-  listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listProducts(filter: $filter, nextToken: $nextToken) {
     items {
       id
       title

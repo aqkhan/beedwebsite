@@ -13,11 +13,7 @@ const Productspage = () => {
     const [products, setprdocts] = useState(null);
     const [copydata, setcopydata] = useState(null);
     const [farms, setfarms] = useState(null);
-    const {data, error} = useQuery(listProducts, listFarms, {
-        variables: {
-            limit: 1000
-        }
-    });
+    const {data, error} = useQuery(listProducts)
 
     const farmsList = useQuery(listFarms);
     useEffect(() => {

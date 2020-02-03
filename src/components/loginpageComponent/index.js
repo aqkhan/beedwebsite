@@ -5,10 +5,11 @@ import {Formik} from 'formik';
 import axios from "axios";
 import {apiPath} from "../../../config";
 import jwt_decode from "jwt-decode";
+import BackgroundImage from "../../images/login-bg.png"
 const LoginComponent = () => {
 
     const [error, seterror] = useState("")
-    const [submitBtn, setSubmitbtn] = useState("Submit")
+    const [submitBtn, setSubmitbtn] = useState("LOGIN")
 
     const Login = (values) => {
         setSubmitbtn("Loading...")
@@ -19,7 +20,7 @@ const LoginComponent = () => {
         }
 
         axios.post(apiPath + "/login", data).then(res => {
-                setSubmitbtn("Submit")
+                setSubmitbtn("LOGIN")
                 if (res.data.idToken) {
                     let Newtoken = jwt_decode(res.data.idToken);
                     console.log(Newtoken, "new token")
@@ -67,6 +68,8 @@ const LoginComponent = () => {
     return (
         <Container className="login-container">
 
+            <div className="d-flex main-div-login col-md-12 p-0 justify-content-center">
+                <div className="col-md-5 p-0">
 
             <Formik validateOnChange={false} initialValues={{username: '', password: ''}}
                     validate={(values) => validate(values)}
@@ -77,7 +80,9 @@ const LoginComponent = () => {
                       errors
                   }) => (
                     <Form onSubmit={handleSubmit}>
-                        <h1>Login </h1>
+                        <div className="d-flex justify-content-center ">
+                            <img src={require("../../images/new-logo.jpg")} alt="Login Logo"/>
+                        </div>
                         <Form.Group>
                             <Form.Label htmlFor="username">Username</Form.Label>
                             <Form.Control type="username" placeholder="Enter email"
@@ -115,17 +120,22 @@ const LoginComponent = () => {
                             }
                         </div>
                         <div className="d-flex justify-content-center">
-                            <Button variant="primary" type="submit">
+                            <Button variant="" type="submit">
                                 {submitBtn}
                             </Button>
                         </div>
                         <div className="error-div">
                             <p className="error">{error}</p>
                         </div>
-                        <p className="dont-have-account">Don't Have an Account.<span>Sign Up</span></p>
+                        {/*<p className="dont-have-account">Don't Have an Account.<span>Sign Up</span></p>*/}
                     </Form>
                 )}
             </Formik>
+                </div>
+             <div className="login-bg-image col-md-5 p-0"   style={{backgroundImage: `url(${BackgroundImage})`}}>
+
+             </div>
+            </div>
             <Style/>
         </Container>
     )
